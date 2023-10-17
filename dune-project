@@ -5,9 +5,9 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github Nastalgua/3110-final-project))
 
-(authors "Author Name")
+(authors "I forgot the group name lmao")
 
 (maintainers "Maintainer Name")
 
