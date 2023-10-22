@@ -15,6 +15,7 @@ let rec wait_for_yes (fn : string) (choice : string) =
       let new_choice = read_line () in
       wait_for_yes fn new_choice
 
+(** Returns a variable of type gender which the user chose *)
 let get_gender (choice : int) =
   match choice with
   | 1 -> Student.Male
