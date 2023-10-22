@@ -1,1 +1,3 @@
-let () = print_endline "Hello, Kevin!"
+open Lib.CourseGame
+
+let () = start_game ()
