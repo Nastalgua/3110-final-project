@@ -31,6 +31,8 @@ let create_projectile p =
 let update p =
   let todo x =
     Projectile.move_in_dir x projectile_spd;
-    Projectile.draw x projectile_size
+    if not (Projectile.has_left_screen x Settings.width Settings.height) then
+      Projectile.draw x projectile_size
+    else ()
   in
   Array.iter todo p.created_p

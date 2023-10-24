@@ -5,7 +5,7 @@ let time = ref 0.0
 
 let game_setup () =
   Raylib.init_window Settings.width Settings.height "Course Game";
-  Raylib.set_target_fps 60;
+  Raylib.set_target_fps Settings.target_fps;
   Player.create Settings.start_x Settings.start_y
 
 let player_controller (player : player_obj) =
@@ -41,11 +41,14 @@ let draw_movement_bar () =
   let x, y, len = Settings.movement_area in
   Raylib.draw_rectangle x y len 50 color
 
+(* [set_timeout callback] runs the callback every at each
+   [Settings.spawn_rate]. *)
 let set_timeout callback =
-  if !time /. (Settings.spawn_rate *. 60.0) >= 1.0 then (fun () ->
+  if !time /. (Settings.spawn_rate *. float_of_int Settings.target_fps) >= 1.0
+  then (
     callback ();
     time := 0.0)
-  else fun () -> time := !time +. 1.0
+  else time := !time +. 1.0
 
 let rec loop player proj_manager ball_color =
   match Raylib.window_should_close () with
@@ -54,17 +57,9 @@ let rec loop player proj_manager ball_color =
       let open Raylib in
       let _ =
         player_controller player;
-        set_timeout
-          (fun () -> ProjectileManager.create_projectile proj_manager)
-          ()
+        set_timeout (fun () -> ProjectileManager.create_projectile proj_manager)
       in
       begin_drawing ();
-      draw_text
-        (""
-        ^ string_of_float (Vector2.x (get_mouse_position ()))
-        ^ " "
-        ^ string_of_float (Vector2.y (get_mouse_position ())))
-        10 10 20 Color.darkgray;
       clear_background Color.raywhite;
       draw_movement_bar ();
       ProjectileManager.update proj_manager;
