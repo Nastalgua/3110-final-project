@@ -22,3 +22,6 @@ val update_dir : player_info -> int -> unit
 (* [dir p] gives back the direction the player is moving in. -1 --> Left 1 -->
    Right *)
 val dir : player_info -> int
+
+(* [draw p] draws the player using the Raylib library. *)
+val draw : player_info -> float -> unit

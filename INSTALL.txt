@@ -1,0 +1,7 @@
+To build the game, start by doing installing the graphics library called `raylib`:
+1. Run `opam depext raylib`.
+2. Run `opam install raylib`.
+3. Run `make build`.
+
+To run the game: 
+1. Run `make game`.

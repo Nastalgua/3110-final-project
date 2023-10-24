@@ -72,7 +72,8 @@ let rec loop player ball_color =
         10 10 20 Color.darkgray;
       clear_background Color.raywhite;
       draw_movement_bar ();
-      draw_player next ball_color;
+      (* draw_player next ball_color; *)
+      Player.draw player circle_size;
       end_drawing ();
       loop player ball_color
 
