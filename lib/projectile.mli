@@ -16,3 +16,6 @@ val pos : projectile -> Raylib.Vector2.t
    outside of the box made from the top-left and bottom-right corners
    respectively: (0, 0), (width, height) *)
 val has_left_screen : projectile -> int -> int -> bool
+
+(* [draw p s] draws the projectile of [s] size using the Raylib library. *)
+val draw : projectile -> float -> unit

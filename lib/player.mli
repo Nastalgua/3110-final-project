@@ -23,5 +23,5 @@ val update_dir : player_info -> int -> unit
    Right *)
 val dir : player_info -> int
 
-(* [draw p] draws the player using the Raylib library. *)
+(* [draw p s] draws the player of [s] size using the Raylib library. *)
 val draw : player_info -> float -> unit
