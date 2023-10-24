@@ -12,6 +12,12 @@ val move_in_dir : projectile -> float -> unit
 (* [pos p] gives back the position of the projectile. *)
 val pos : projectile -> Raylib.Vector2.t
 
+(* [x_pos] gives back the x-position of the projectile. *)
+val x_pos : projectile -> float
+
+(* [y_pos] gives back the y-position of the projectile. *)
+val y_pos : projectile -> float
+
 (* [has_left_screen p width height] returns true if projectile's position is
    outside of the box made from the top-left and bottom-right corners
    respectively: (0, 0), (width, height) *)

@@ -3,7 +3,7 @@ type p_manager
 (* [create w c r] creates a projectile manager. [c] number of projectiles will
    spawn on horizontal line from [0...w]. Projectiles will spawn at a rate of
    [r]. *)
-val create : int -> float -> p_manager
+val create : int -> float -> Player.player_info -> p_manager
 
 (* [pick_random_spawn] gives back a random Vector2 pos for the projectile to
    start at. *)
@@ -19,6 +19,10 @@ val create_projectile : p_manager -> unit
 
 (* [float_width] gives width as a float. *)
 val float_width : p_manager -> float
+
+(* [has_projectile_hit_player p obj] Checks if the [obj] has hit the player
+   inside of [p]. *)
+val has_projectile_hit_player : p_manager -> Projectile.projectile -> bool
 
 (* [update p] updates the positions of the created projectiles. Creates new
    projectiles if [timeout] with time=rate has finished. *)

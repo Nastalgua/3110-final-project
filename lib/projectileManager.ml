@@ -4,10 +4,11 @@ let projectile_size = 25.0
 type p_manager = {
   width : int;
   rate : float;
-  mutable created_p : Projectile.projectile array;
+  player : Player.player_info;
+  mutable created_p : Projectile.projectile list;
 }
 
-let create w r = { width = w; rate = r; created_p = [||] }
+let create w r p = { width = w; rate = r; player = p; created_p = [] }
 let float_width p = float_of_int p.width
 
 let pick_random_spawn p =
@@ -26,13 +27,34 @@ let create_projectile p =
   let target = pick_target_pos Settings.movement_area in
   let dir = Raylib.Vector2.normalize (Raylib.Vector2.subtract target v) in
   let proj = Projectile.create x 0.0 dir in
-  p.created_p <- Array.append p.created_p [| proj |]
+  p.created_p <- proj :: p.created_p
+
+let has_projectile_hit_player p obj =
+  let play_x = Player.x_pos p.player in
+  let play_y = Player.y_pos p.player in
+  let obj_x = Projectile.x_pos obj in
+  let obj_y = Projectile.y_pos obj in
+  let play_radius = Settings.circle_size /. 2.0 in
+  let obj_radius = projectile_size /. 1.0 in
+  (* Better collision detection. *)
+  let distance =
+    sqrt
+      (((play_x -. obj_x) *. (play_x -. obj_x))
+      +. ((play_y -. obj_y) *. (play_y -. obj_y)))
+  in
+  distance <= play_radius +. obj_radius
+
+let should_delete_projectile p obj =
+  if has_projectile_hit_player p obj then
+    List.filter (fun x -> obj <> x) p.created_p
+  else p.created_p
 
 let update p =
   let todo x =
     Projectile.move_in_dir x projectile_spd;
     if not (Projectile.has_left_screen x Settings.width Settings.height) then
       Projectile.draw x projectile_size
-    else ()
+    else ();
+    p.created_p <- should_delete_projectile p x
   in
-  Array.iter todo p.created_p
+  List.iter todo p.created_p

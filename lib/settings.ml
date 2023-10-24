@@ -6,7 +6,7 @@ let start_y = float_of_int height *. start_fraction
 let circle_size = 25.0
 let movement_speed = 300.0
 let margin = 50.0
-let spawn_rate = 0.5 (* In seconds *)
+let spawn_rate = 0.8 (* In seconds *)
 let target_fps = 60
 
 let movement_area =

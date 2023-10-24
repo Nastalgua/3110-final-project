@@ -70,6 +70,6 @@ let rec loop player proj_manager ball_color =
 let start_game () =
   let player = game_setup () in
   let proj_manager =
-    ProjectileManager.create Settings.width Settings.spawn_rate
+    ProjectileManager.create Settings.width Settings.spawn_rate player
   in
   loop player proj_manager Raylib.Color.darkblue

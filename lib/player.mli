@@ -16,6 +16,12 @@ val update_pos : player_info -> float -> float -> unit
 (* [get_pos p] gives back the position of the player. *)
 val pos : player_info -> Raylib.Vector2.t
 
+(* [x_pos] gives back the x-position of the player. *)
+val x_pos : player_info -> float
+
+(* [y_pos] gives back the y-position of the player. *)
+val y_pos : player_info -> float
+
 (* [update_dir p d] changes the player's direction of movement to [d] *)
 val update_dir : player_info -> int -> unit
 
