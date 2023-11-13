@@ -1,5 +1,7 @@
 (* All questions can have at most 26 choices. *)
-let questions : Question.t list =
+
+(* To create a new set of questions, follow example below: *)
+let example_questions : Question.t list =
   [
     Question.make "What is your favorite fruit" 0
       [ "Apple"; "Bitches"; "Orange"; "Your mum" ];

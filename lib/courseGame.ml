@@ -2,7 +2,6 @@ type player_obj = Player.player_info
 type p_manager = ProjectileManager.t
 
 let time = ref 0.0
-let curr_q_manager = ref (QuestionManager.create Questions.questions)
 
 let game_setup () =
   Raylib.init_window Settings.width Settings.height "Course Game";
