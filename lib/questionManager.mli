@@ -8,7 +8,7 @@ val create : Question.t list -> t
 val pop : t -> Question.t option
 
 (* [peek q_m] returns the current question being asked. *)
-val peek : t -> Question.t
+val peek : t -> Question.t option
 
 (* [is_empty q_m] true if there are no questions left. *)
 val is_empty : t -> bool

@@ -1,3 +1,4 @@
+(* All questions can have at most 26 choices. *)
 let questions : Question.t list =
   [
     Question.make "What is your favorite fruit" 0

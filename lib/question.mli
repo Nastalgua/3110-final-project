@@ -1,6 +1,8 @@
 type answer
 type t
 
+val default_question : t
+
 (* [make q a choices] creates a question with its assigned answer index in
    [choices]. Also, sets available choices based on the order of the list
    presented. Ex. if choices = ["H"; "e", "l", "o"], then answers would

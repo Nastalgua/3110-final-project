@@ -1,6 +1,6 @@
 let width = 800
-let height = 500
-let start_fraction = 4.0 /. 5.0
+let height = 700
+let start_fraction = 3.0 /. 5.0
 let start_x = float_of_int width *. start_fraction
 let start_y = float_of_int height *. start_fraction
 let circle_size = 25.0
@@ -9,6 +9,9 @@ let margin = 50.0
 let spawn_rate = 0.8 (* In seconds *)
 let target_fps = 60
 let projectile_text_size = 25
+let rect_height = 50
+let question_text_size = 25
+let choice_text_size = 20
 
 let movement_area =
   let x = int_of_float margin - int_of_float circle_size in

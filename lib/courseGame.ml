@@ -41,7 +41,7 @@ let player_controller (player : player_obj) =
 let draw_movement_bar () =
   let color = Raylib.Color.gray in
   let x, y, len = Settings.movement_area in
-  Raylib.draw_rectangle x y len 50 color
+  Raylib.draw_rectangle x y len Settings.rect_height color
 
 (* [set_timeout callback] runs the callback every at each
    [Settings.spawn_rate]. *)
@@ -65,6 +65,10 @@ let rec loop player proj_manager question_manager ball_color =
       clear_background Color.raywhite;
       draw_movement_bar ();
       ProjectileManager.update proj_manager question_manager;
+      QuestionManager.draw_question
+        (match QuestionManager.peek question_manager with
+        | None -> Question.default_question
+        | Some q -> q);
       Player.draw player Settings.circle_size;
       end_drawing ();
       loop player proj_manager question_manager ball_color

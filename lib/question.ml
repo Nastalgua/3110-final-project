@@ -12,6 +12,13 @@ type t = {
   choices : answer list;
 }
 
+let default_question =
+  {
+    question = "You're done! That's all the problems.";
+    choices = [];
+    answer = A (0, "Done");
+  }
+
 let default_choices = ref [| A (0, ""); B (1, ""); C (2, ""); D (3, "") |]
 let available_choices = ref !default_choices
 
