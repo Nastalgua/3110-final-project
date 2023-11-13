@@ -1,11 +1,11 @@
 let projectile_spd = 100.0
-let projectile_size = 25.0
+let projectile_size = 16.5
 
-type p_manager = {
+type t = {
   width : int;
   rate : float;
   player : Player.player_info;
-  mutable created_p : Projectile.projectile list;
+  mutable created_p : Projectile.t list;
 }
 
 let create w r p = { width = w; rate = r; player = p; created_p = [] }
@@ -22,11 +22,12 @@ let pick_target_pos (x, y, len) =
   Raylib.Vector2.create rand_x (float_of_int y)
 
 let create_projectile p =
+  let rand_answer = Question.pick_rand_ans () in
   let v = pick_random_spawn p in
   let x = Raylib.Vector2.x v in
   let target = pick_target_pos Settings.movement_area in
   let dir = Raylib.Vector2.normalize (Raylib.Vector2.subtract target v) in
-  let proj = Projectile.create x 0.0 dir in
+  let proj = Projectile.create x 0.0 rand_answer dir in
   p.created_p <- proj :: p.created_p
 
 let has_projectile_hit_player p obj =

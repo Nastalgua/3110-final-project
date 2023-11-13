@@ -1,11 +1,12 @@
 type player_obj = Player.player_info
-type p_manager = ProjectileManager.p_manager
+type p_manager = ProjectileManager.t
 
 let time = ref 0.0
 
 let game_setup () =
   Raylib.init_window Settings.width Settings.height "Course Game";
   Raylib.set_target_fps Settings.target_fps;
+  Settings.set_imgs ();
   Player.create Settings.start_x Settings.start_y
 
 let player_controller (player : player_obj) =
