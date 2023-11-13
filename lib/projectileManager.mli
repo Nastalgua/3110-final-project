@@ -26,4 +26,4 @@ val has_projectile_hit_player : t -> Projectile.t -> bool
 
 (* [update p] updates the positions of the created projectiles. Creates new
    projectiles if [timeout] with time=rate has finished. *)
-val update : t -> unit
+val update : t -> QuestionManager.t -> unit

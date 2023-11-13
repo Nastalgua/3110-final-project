@@ -2,6 +2,7 @@ type player_obj = Player.player_info
 type p_manager = ProjectileManager.t
 
 let time = ref 0.0
+let curr_q_manager = ref (QuestionManager.create Questions.questions)
 
 let game_setup () =
   Raylib.init_window Settings.width Settings.height "Course Game";
@@ -51,7 +52,7 @@ let set_timeout callback =
     time := 0.0)
   else time := !time +. 1.0
 
-let rec loop player proj_manager ball_color =
+let rec loop player proj_manager question_manager ball_color =
   match Raylib.window_should_close () with
   | true -> Raylib.close_window ()
   | false ->
@@ -63,14 +64,15 @@ let rec loop player proj_manager ball_color =
       begin_drawing ();
       clear_background Color.raywhite;
       draw_movement_bar ();
-      ProjectileManager.update proj_manager;
+      ProjectileManager.update proj_manager question_manager;
       Player.draw player Settings.circle_size;
       end_drawing ();
-      loop player proj_manager ball_color
+      loop player proj_manager question_manager ball_color
 
-let start_game () =
+let start_game q_lst =
   let player = game_setup () in
   let proj_manager =
     ProjectileManager.create Settings.width Settings.spawn_rate player
   in
-  loop player proj_manager Raylib.Color.darkblue
+  let question_manager = QuestionManager.create q_lst in
+  loop player proj_manager question_manager Raylib.Color.darkblue

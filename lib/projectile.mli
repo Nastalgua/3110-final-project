@@ -18,6 +18,9 @@ val x_pos : t -> float
 (* [y_pos] gives back the y-position of the projectile. *)
 val y_pos : t -> float
 
+(* [get_ans] gives back the answer associated with the projectile. *)
+val get_ans : t -> Question.answer
+
 (* [has_left_screen p width height] returns true if projectile's position is
    outside of the box made from the top-left and bottom-right corners
    respectively: (0, 0), (width, height) *)

@@ -45,17 +45,29 @@ let has_projectile_hit_player p obj =
   in
   distance <= play_radius +. obj_radius
 
-let should_delete_projectile p obj =
+let should_delete_projectile p obj q_manager =
+  let collided_with_correct_answer () =
+    if QuestionManager.is_empty q_manager then false
+    else
+      let curr_q = QuestionManager.peek q_manager in
+      let selected_ans = Projectile.get_ans obj in
+      Question.is_answer_correct curr_q selected_ans
+  in
   if has_projectile_hit_player p obj then
+    let _ =
+      if collided_with_correct_answer () then
+        Questions.got_question_correct q_manager
+      else Questions.got_question_wrong q_manager
+    in
     List.filter (fun x -> obj <> x) p.created_p
   else p.created_p
 
-let update p =
+let update p q_manager =
   let todo x =
     Projectile.move_in_dir x projectile_spd;
     if not (Projectile.has_left_screen x Settings.width Settings.height) then
       Projectile.draw x projectile_size
     else ();
-    p.created_p <- should_delete_projectile p x
+    p.created_p <- should_delete_projectile p x q_manager
   in
   List.iter todo p.created_p

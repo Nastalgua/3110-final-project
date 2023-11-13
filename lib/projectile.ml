@@ -14,6 +14,7 @@ let move_in_dir p spd =
 let pos p = p.pos
 let x_pos p = Raylib.Vector2.x (pos p)
 let y_pos p = Raylib.Vector2.y (pos p)
+let get_ans p = p.answer
 
 let has_left_screen p width height =
   let x = x_pos p in
