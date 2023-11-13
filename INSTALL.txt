@@ -1,0 +1,7 @@
+Instructions to run our game are listed in order below
+1. download the zip to our game
+2. open the zip 
+3. While you are in the 3110-final-project folder 
+  directory enter [ make play ] into the terminal
+  without the [ ]
+4. enjoy!
