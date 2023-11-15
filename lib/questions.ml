@@ -1,7 +1,7 @@
 (* All questions can have at most 26 choices. *)
 
 (* To create a new set of questions, follow example below: *)
-let example_questions : Question.t list =
+let cs1110 : Question.t list =
   [
     (* CS 1110 *)
     Question.make "How is a comment written in Python?" 1
@@ -19,6 +19,10 @@ let example_questions : Question.t list =
       [ "Tuple"; "String"; "List"; "Integer" ];
     Question.make "What is Professor White's first name?" 3
       [ "Michael"; "Walter"; "Luke"; "Walker" ];
+  ]
+
+let cs2110 : Question.t list =
+  [
     (* CS 2110 *)
     Question.make "Dijkstra’s algorithm is used for:" 2
       [
@@ -40,6 +44,10 @@ let example_questions : Question.t list =
       [ "O(log n)"; "O(n log n)"; "O(n)"; "O(1)" ];
     Question.make "A complete binary tree can be represented as:" 1
       [ "Linked list"; "Array"; "Stack"; "Queue" ];
+  ]
+
+let cs3110 : Question.t list =
+  [
     (* CS 3110 *)
     Question.make "Which is less used in functional programming?" 3
       [
@@ -71,6 +79,10 @@ let example_questions : Question.t list =
         "Looping constructs";
         "Asynchronous operations";
       ];
+  ]
+
+let cs2800 : Question.t list =
+  [
     (* CS 2800 *)
     Question.make "# of edges in a complete graph with n vertices:" 3
       [ "n"; "n^2"; "n/2"; "(n*(n-1))/2" ];
@@ -102,6 +114,10 @@ let example_questions : Question.t list =
         "It has a finite number of elements";
         "It is a subset of real numbers";
       ];
+  ]
+
+let phys1112 : Question.t list =
+  [
     (* PHYS 1112 *)
     Question.make "Which below is NOT a vector quantity?" 1
       [ "Force"; "Speed"; "Momentum"; "Displacement" ];
@@ -118,6 +134,10 @@ let example_questions : Question.t list =
         "F_g increases 4x";
         "F_g  decreases 4x";
       ];
+  ]
+
+let phys2213 : Question.t list =
+  [
     (* PHYS 2213 *)
     Question.make "Which is the E&M analog to speed in mechanics?" 2
       [ "Electric Field"; "Magnetic Flux"; "Current"; "Voltage" ];
@@ -144,6 +164,10 @@ let example_questions : Question.t list =
         "Propagate in vacuum";
         "Induce current";
       ];
+  ]
+
+let math1920 : Question.t list =
+  [
     (* MATH 1920 *)
     Question.make "\"Maximum rate of increase\" is related to:" 3
       [ "Divergence"; "Curl"; "Cross product"; "Gradient" ];
@@ -170,6 +194,10 @@ let example_questions : Question.t list =
         "Div of the grad";
         "Grad of the div";
       ];
+  ]
+
+let math2940 : Question.t list =
+  [
     (* MATH 2940 *)
     Question.make "In a vector space, a basis is:" 2
       [
