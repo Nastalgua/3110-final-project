@@ -31,6 +31,8 @@ let get_gender (choice : int) =
   | 3 -> Other
   | _ -> Other
 
+let get_courses_taken (s : student) = s.courses
+
 let init_student (s : student) (name : string) (g : gender) =
   set_name s name;
   set_gender s g
@@ -46,6 +48,11 @@ let add_course (s : student) (course : string) =
   let prev_courses = s.courses in
   s.num_courses <- prev_num_courses + 1;
   s.courses <- prev_courses @ [ course ]
+
+let rec has_course (course_list : string list) (course : string) =
+  match course_list with
+  | [] -> false
+  | h :: t -> if course = h then true else has_course t course
 
 let avg_grade (s : student) =
   if s.num_courses > 0 then s.total_grade /. float_of_int s.num_courses else 0.0

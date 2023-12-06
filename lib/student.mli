@@ -27,6 +27,10 @@ val get_name : student -> string
 (** Gets the name of the given student [s]  *)
 val get_gender : int -> gender
 (** Gets the gender of the given student [s]  *)
+val get_courses_taken : student -> string list 
+(** Given a student [s] we return a string list from their field s.courses *)
+val has_course : string list -> string -> bool
+(** Given a string list [course_list] and a string [c] we check to see that c is in course_list*)
 
 val init_student : student -> string -> gender -> unit
 (** Initializes the name and gender with [name] and [g] for a student [s] *)

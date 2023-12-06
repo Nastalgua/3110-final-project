@@ -1,3 +1,3 @@
-open Lib.CourseGame
+open Lib.Story
 
-let () = start_game Lib.Questions.cs1110
+let () = play_story story_text
