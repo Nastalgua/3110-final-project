@@ -27,6 +27,42 @@ let story_text =
   "This test will require you to [...]";
   "Would you like to take the test now?";
   "WAIT";
+  "Welcome to CS 2110!";
+  "In order to pass CS 2110 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to CS 3110!";
+  "In order to pass CS 3110 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to CS 2800!";
+  "In order to pass CS 2800 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to PHYS 1112!";
+  "In order to pass PHYS 1112 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to PHYS 2213";
+  "In order to pass PHYS 2213 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to MATH 1920!";
+  "In order to pass MATH 1920 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+  "Welcome to MATH 2940!";
+  "In order to pass MATH 2940 you must pass our test";
+  "This test will require you to [...]";
+  "Would you like to take the test now?";
+  "WAIT";
+
   (**===================== END OF GAME ===========================*)
   (**======================== ENDING ============================*)
   "CONGRATS You have reached the end of Programmer University...";
