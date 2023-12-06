@@ -23,8 +23,10 @@ val set_name : student -> string -> unit
 
 val set_gender : student -> gender -> unit
 (** Sets the gender of the given student [s] to a new gender [g] *)
-
+val get_name : student -> string
+(** Gets the name of the given student [s]  *)
 val get_gender : int -> gender
+(** Gets the gender of the given student [s]  *)
 
 val init_student : student -> string -> gender -> unit
 (** Initializes the name and gender with [name] and [g] for a student [s] *)

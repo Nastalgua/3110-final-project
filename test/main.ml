@@ -6,11 +6,16 @@ open Lib
 (** Test modules *)
 
 module Test_Student = Lib.Student
+module Test_Teacher = Lib.Teacher
 
 (** Variables *)
 
 let new_student = Test_Student.new_student
+let new_teacher = Test_Teacher.new_teacher
 let zero_course_student = new_student ()
+
+let setup_teacher =
+  Test_Teacher.init_teacher (new_teacher ()) "Michael" Test_Teacher.Male
 
 let one_course_student =
   {
@@ -31,17 +36,37 @@ let hypothetical_student =
 
 (** Testing Functions *)
 
-let test_set_name expected s n =
+let test_set_student_name expected s n =
   Test_Student.set_name s n;
   assert_equal expected s.student_name
 
-let test_set_gender expected s g =
+let test_set_student_gender expected s g =
   Test_Student.set_gender s g;
   assert_equal expected s.gender
 
-let test_get_gender expected in1 =
+let test_get_student_gender expected in1 =
   let g = Test_Student.get_gender in1 in
   assert_equal expected g
+
+let test_get_student_name expected in1 =
+  let n = Test_Student.get_name in1 in
+  assert_equal expected n
+
+let test_set_teacher_name expected t n =
+  Test_Teacher.set_teacher_name t n;
+  assert_equal expected (Test_Teacher.get_teacher_name t)
+
+let test_set_teacher_gender expected t g =
+  Test_Teacher.set_teacher_gender t g;
+  assert_equal expected (Test_Teacher.get_teacher_gender t)
+
+let test_get_teacher_gender expected in1 =
+  let g = Test_Student.get_gender in1 in
+  assert_equal expected g
+
+let test_get_teacher_name expected in1 =
+  let n = Test_Teacher.get_teacher_name in1 in
+  assert_equal expected n
 
 let test_init_student (expected : Test_Student.student) s n g =
   Test_Student.init_student s n g;
@@ -77,14 +102,14 @@ let student_tests =
     ( "set_name test" >:: fun _ ->
       let student = new_student () in
       let name = "Michael" in
-      test_set_name "Michael" student name );
+      test_set_student_name "Michael" student name );
     ( "set_gender test" >:: fun _ ->
       let student = new_student () in
       let new_gender = Test_Student.Male in
-      test_set_gender new_gender student new_gender );
+      test_set_student_gender new_gender student new_gender );
     ( "get_gender test" >:: fun _ ->
       let choice = 1 in
-      test_get_gender Test_Student.Male choice );
+      test_get_student_gender Test_Student.Male choice );
     ( "init_student test" >:: fun _ ->
       let student_with_info =
         {
@@ -120,5 +145,17 @@ let student_tests =
       test_finish_course hypothetical_student s 90. "CS6110" );
   ]
 
-let suite = "Testing suite" >::: List.flatten [ student_tests ]
+let teacher_tests =
+  [
+    ( "set_name test" >:: fun _ ->
+      let teacher = new_teacher () in
+      let name = "Michael" in
+      test_set_teacher_name "Michael" teacher name );
+    ( "set_gender test" >:: fun _ ->
+      let teacher = new_teacher () in
+      let new_gender = Test_Teacher.Male in
+      test_set_teacher_gender new_gender teacher new_gender );
+  ]
+
+let suite = "Testing suite" >::: List.flatten [ student_tests; teacher_tests ]
 let () = run_test_tt_main suite

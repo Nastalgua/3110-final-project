@@ -22,6 +22,7 @@ let new_student () =
 
 let set_name (s : student) (name : string) = s.student_name <- name
 let set_gender (s : student) (g : gender) = s.gender <- g
+let get_name (s : student) = s.student_name
 
 let get_gender (choice : int) =
   match choice with
