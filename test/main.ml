@@ -7,6 +7,7 @@ open Lib
 
 module Test_Student = Lib.Student
 module Test_Teacher = Lib.Teacher
+module Test_Score = Lib.Score
 
 (** Variables *)
 
@@ -157,5 +158,26 @@ let teacher_tests =
       test_set_teacher_gender new_gender teacher new_gender );
   ]
 
-let suite = "Testing suite" >::: List.flatten [ student_tests; teacher_tests ]
+let score_tests =
+  [
+    ("get score test" >:: fun _ -> assert_equal 0 (Test_Score.get_score ()));
+    ( "increment test" >:: fun _ ->
+      Test_Score.add_one ();
+      assert_equal 1 (Test_Score.get_score ()) );
+    ( "increment a score > 1 test" >:: fun _ ->
+      Test_Score.add_one ();
+      Test_Score.add_one ();
+      print_endline (string_of_int (Test_Score.get_score ()));
+      assert_equal 2 (Test_Score.get_score ()) );
+    ( "reset score test" >:: fun _ ->
+      Test_Score.add_one ();
+      Test_Score.add_one ();
+      Test_Score.reset_score ();
+      assert_equal 0 (Test_Score.get_score ()) );
+  ]
+
+let suite =
+  "Testing suite"
+  >::: List.flatten [ student_tests; teacher_tests; score_tests ]
+
 let () = run_test_tt_main suite
