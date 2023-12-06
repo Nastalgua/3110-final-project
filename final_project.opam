@@ -12,6 +12,7 @@ bug-reports: "https://github.com/Nastalgua/3110-final-project/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.10"}
+  "raylib" {>= "0.3.2" & < "1.0.0"}
   "odoc" {with-doc}
 ]
 build: [

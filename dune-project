@@ -19,7 +19,13 @@
  (name final_project)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune)
+ (depends
+  ocaml
+  dune
+  (raylib
+   (and
+    (>= 0.3.2)
+    (< 1.0.0))))
  (tags
   (topics "to describe" your project)))
 

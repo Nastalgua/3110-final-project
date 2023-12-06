@@ -1,7 +1,15 @@
 Instructions to run our game are listed in order below
+To build the game, start by doing installing the graphics library called `raylib`:
 1. download the zip to our game
 2. open the zip 
-3. While you are in the 3110-final-project folder 
+3. Run `opam depext raylib`.
+4. Run `opam install raylib`.
+5. Run `make build`.
+
+To run the game: 
+6. Run `make game`.
+7. While you are in the 3110-final-project folder 
   directory enter [ make play ] into the terminal
   without the [ ]
-4. enjoy!
+8. enjoy!
+
