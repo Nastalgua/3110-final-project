@@ -14,7 +14,7 @@ type t = {
 
 let default_question =
   {
-    question = "You're done! That's all the problems.";
+    question = "You're done! Press esc to close the window.";
     choices = [];
     answer = A (0, "Done");
   }

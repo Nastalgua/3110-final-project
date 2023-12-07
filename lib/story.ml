@@ -31,20 +31,7 @@ let story_text =
   "GOTOCLASS";
   "GETQUESTIONS";
   "Wow that was fun wasnt it? Now choose your next class";
-  "CHOOSECLASS";
-  "GOTOCLASS";
-  "GETQUESTIONS";
-  "Wow that was fun wasnt it? Now choose your next class";
-  "CHOOSECLASS";
-  "GOTOCLASS";
-  "GETQUESTIONS";
-  "Wow that was fun wasnt it? Now choose your next class";
-  "CHOOSECLASS";
-  "GOTOCLASS";
-  "GETQUESTIONS";
-  "Wow that was fun wasnt it? Now choose your next class";
   
-  "WAIT";
   
   
   (**===================== END OF GAME ===========================*)
@@ -82,13 +69,14 @@ let check_pre_req (s : student) (c : string) =
   | "PHYS 2213" -> if (has_course courses "PHYS 1112") then true else false
   | "PHYS 2940" -> if (has_course courses "MATH 1920") then true else false
   | _ -> false
+
 let play_class_scene (c : string) = 
     print_endline ("Welcome to " ^ c ^ "!");
     print_endline ("In order to pass " ^ c ^ " you must pass our test");
     print_endline "This test will require you to answer a lot of questions";
     print_endline "Would you like to take the test now?"
 
-let play_questions (c : string) =
+let rec play_questions (c : string) =
   (
   match c with 
   | "CS 1110" -> (start_game Questions.cs1110); num_qs := List.length Questions.cs1110
@@ -111,13 +99,14 @@ let play_questions (c : string) =
       (print_student player)
     )
 else
-  (print_endline "LOL YOU FAILED DUMBASS!!! XDDDDD"));
+  (print_endline "LOL YOU FAILED!!! XDDDDD"));
   reset_score ()
+
   
 
 let rec choose_class (s : student) (choice : string) = 
   match choice with 
-  | x -> if check_pre_req player x then ((curr_class := x); (print_endline "You may take this class"); (print_endline !curr_class)) else ((print_endline "fuck you"); choose_class s (read_line ()));
+  | x -> if check_pre_req player x then ((curr_class := x); (print_endline "You may take this class"); (print_endline !curr_class)) else ((print_endline "Not qualified"); choose_class s (read_line ()));
   | _ -> print_endline "How did you get here"
 
 let rec play_story (txt : string list) =
