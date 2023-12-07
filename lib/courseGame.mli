@@ -7,7 +7,12 @@ val game_setup : unit -> player_obj
 (* [loop p c] runs the main game loop. Everything that should be updated every
    frame should be in this method. *)
 val loop :
-  player_obj -> p_manager -> QuestionManager.t -> Raylib.Color.t -> unit
+  player_obj ->
+  p_manager ->
+  QuestionManager.t ->
+  Raylib.Color.t ->
+  Raylib.Music.t ->
+  unit
 
 (* [start_game] sets up the game and starts the game loop. *)
 val start_game : Question.t list -> unit

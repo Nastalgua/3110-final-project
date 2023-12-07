@@ -5,6 +5,7 @@ let time = ref 0.0
 
 let game_setup () =
   Raylib.init_window Settings.width Settings.height "Course Game";
+  Raylib.init_audio_device ();
   Raylib.set_target_fps Settings.target_fps;
   Settings.set_imgs ();
   Player.create Settings.start_x Settings.start_y
@@ -51,11 +52,15 @@ let set_timeout callback =
     time := 0.0)
   else time := !time +. 1.0
 
-let rec loop player proj_manager question_manager ball_color =
+let rec loop player proj_manager question_manager ball_color music =
   match Raylib.window_should_close () with
-  | true -> Raylib.close_window ()
+  | true ->
+      Raylib.unload_music_stream music;
+      Raylib.close_audio_device ();
+      Raylib.close_window ()
   | false ->
       let open Raylib in
+      update_music_stream music;
       let _ =
         player_controller player;
         set_timeout (fun () -> ProjectileManager.create_projectile proj_manager)
@@ -70,12 +75,15 @@ let rec loop player proj_manager question_manager ball_color =
         | Some q -> q);
       Player.draw player Settings.circle_size;
       end_drawing ();
-      loop player proj_manager question_manager ball_color
+      loop player proj_manager question_manager ball_color music
 
 let start_game q_lst =
   let player = game_setup () in
   let proj_manager =
     ProjectileManager.create Settings.width Settings.spawn_rate player
   in
+  let path = Raylib.get_working_directory () ^ "/lib/resources/" in
+  let music = Raylib.load_music_stream (path ^ "pizza.mp3") in
   let question_manager = QuestionManager.create q_lst in
-  loop player proj_manager question_manager Raylib.Color.darkblue
+  Raylib.play_music_stream music;
+  loop player proj_manager question_manager Raylib.Color.darkblue music
