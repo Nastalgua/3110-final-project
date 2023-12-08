@@ -39,9 +39,9 @@ let pre_course_dialogue (t : teacher) =
   print_endline
     (t.teacher_name ^ ":" ^ t.course ^ " will be so fun! I hope you enjoy!")
 
-let post_course_dialogue (t : teacher) (s : student) (grade : float) (passing_grade : float) =
+let post_course_dialogue (t : teacher) (grade : float) (passing_grade : float) =
   print_endline
-    ("Hi! " ^ s.student_name ^ "You received a grade of:"
+    ("Hi! " ^ "You received a grade of:"
    ^ string_of_float grade);
   (** teacher comments on their grade *)
   (if grade < 40.0 then print_endline ( get_teacher_name t ^ ": I have no words")

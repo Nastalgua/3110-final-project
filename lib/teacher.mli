@@ -9,14 +9,6 @@ type teacher = {
   mutable course : string;
 }
 
-type student = {
-  mutable student_name : string;
-  mutable gender : gender;
-  mutable total_grade : float;
-  mutable num_courses : int;
-  mutable courses : string list;
-}
-
 val new_teacher : unit -> teacher
 
 val get_teacher_name : teacher -> string
@@ -36,7 +28,7 @@ val init_teacher : teacher -> string -> gender -> unit
 
 val pre_course_dialogue : teacher -> unit
 (** Prints a response to the student getting them ready for the minigame *)
-val post_course_dialogue : teacher -> student -> float -> float -> string
+val post_course_dialogue : teacher -> float -> float -> string
 (** Prints a response to the student based on the grade they get from the minigame *)
 val print_teacher : teacher -> unit
 (** Prints the teacher information *)

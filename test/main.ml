@@ -14,9 +14,7 @@ module Test_Score = Lib.Score
 let new_student = Test_Student.new_student
 let new_teacher = Test_Teacher.new_teacher
 let zero_course_student = new_student ()
-
-let setup_teacher =
-  Test_Teacher.init_teacher (new_teacher ()) "Michael" Test_Teacher.Male
+let setup_teacher t = Test_Teacher.init_teacher t "Michael" Test_Teacher.Male
 
 let one_course_student =
   {

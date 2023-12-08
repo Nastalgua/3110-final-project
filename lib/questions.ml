@@ -17,8 +17,14 @@ let cs1110 : Question.t list =
       [ "+"; "-"; "*"; "/" ];
     Question.make "In Python, which data type is mutable?" 2
       [ "Tuple"; "String"; "List"; "Integer" ];
+    Question.make
+      "What is the time complexity of combing through an array of size n?" 0
+      [ "O(n)"; "O(logn)"; "O(1)"; "O(0)" ];
     Question.make "What is Professor White's first name?" 3
       [ "Michael"; "Walter"; "Luke"; "Walker" ];
+    Question.make
+      "What method in Python is used to remove the last element from a list?" 0
+      [ "pop()"; "remove()"; "del()"; "discard()" ];
   ]
 
 let cs2110 : Question.t list =
@@ -79,6 +85,8 @@ let cs3110 : Question.t list =
         "Looping constructs";
         "Asynchronous operations";
       ];
+    Question.make "What is a monad? (Choose the best answer)" 3
+      [ "A house"; "An abstract representation of a box"; "A dog"; "A burrito" ];
   ]
 
 let cs2800 : Question.t list =

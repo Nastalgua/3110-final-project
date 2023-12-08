@@ -1,8 +1,10 @@
+open Teacher
 open Student
 open CourseGame
 open Score
 
 let player = new_student ()
+let teacher = new_teacher ()
 let play_game () = ()
 let curr_class = ref ""
 let num_qs = ref 0
@@ -26,6 +28,19 @@ let story_text =
     "CHOOSECLASS";
     (* Initiates class choosing after intro *)
     (*===================== END OF INTRO ===========================*)
+
+    (*===================== ENDING ===========================*)
+    "After overcoming countless challenges and dedicating unyielding effort, \
+     you've triumphed at Programmer University. Your journey through the eight \
+     rigorous courses, mastering intricate coding languages and algorithms, \
+     culminated in a momentous graduation. As you stood among your peers, the \
+     dean praised your unparalleled dedication and innovative problem-solving \
+     skills. Holding your diploma, a testament to your perseverance, you felt \
+     a surge of pride and excitement for the boundless opportunities awaiting \
+     you. Armed with the knowledge and confidence garnered from this journey, \
+     you stepped into the world of technology, ready to make your mark and \
+     shape the future through your coding expertise and unwavering \
+     determination.";
   ]
 
 let game_set_name () = set_name player (read_line ())
@@ -106,6 +121,9 @@ let rec play_questions (c : string) =
   (* update student info only if they pass*)
   (* passing score will be 2/5 questions *)
   (let overall = float_of_int !score /. float_of_int !num_qs in
+   let s = post_course_dialogue teacher overall 0.4 in
+   let res = "STATUS: " ^ s in
+   print_endline res;
    if overall >= 0.4 then (
      add_course player c;
      add_grade player overall)
@@ -115,6 +133,7 @@ let rec play_questions (c : string) =
 let get_num_courses (s : student) : int = s.num_courses
 
 let rec choose_class (s : student) =
+  ();
   let available_courses = eligible_courses s in
   print_endline
     "Here are the courses you are qualified for, type its full name to enroll:";
@@ -147,7 +166,9 @@ let rec play_story (txt : string list) =
   match txt with
   | h :: t ->
       (match h with
-      | "SETNAME" -> game_set_name ()
+      | "SETNAME" ->
+          init_teacher teacher "Mr. Cornell" Male;
+          game_set_name ()
       | "SETGENDER" -> game_set_gender ()
       | "GREET" -> greet ()
       | "WAIT" -> wait_for_yes notify (read_line ())
