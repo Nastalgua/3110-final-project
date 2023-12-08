@@ -1,4 +1,4 @@
-let projectile_spd = 100.0
+let projectile_spd = 70.0
 let projectile_size = 16.5
 
 type t = {

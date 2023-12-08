@@ -18,11 +18,11 @@ let story_text =
     "SETGENDER";
     "Creating character...";
     "GREET";
-    "Aspiring coders and hackers from all corners of the globe gather";
-    "to hone their digital skills and unlock the secrets of the cyber world.";
     "As a student you must embark upon a long, arduous, mindblowing journey of \
-     learning";
-    "Choose a course to start off with \nGoodluck soldier";
+     learning. \n\
+     There are 8 courses you must complete before graduating.";
+    "To pass a course, answer two questions right on the exam.";
+    "Goodluck soldier";
     "CHOOSECLASS";
     (* Initiates class choosing after intro *)
     (*===================== END OF INTRO ===========================*)
@@ -75,12 +75,6 @@ let eligible_courses (s : student) =
       | _ -> true) (* No prerequisites *)
     all_courses
 
-let play_class_scene (c : string) =
-  print_endline ("Welcome to " ^ c ^ "!");
-  print_endline ("In order to pass " ^ c ^ " you must pass our test");
-  print_endline "This test will require you to answer a lot of questions";
-  print_endline "Would you like to take the test now?"
-
 let rec play_questions (c : string) =
   (match c with
   | "CS 1110" ->
@@ -108,14 +102,13 @@ let rec play_questions (c : string) =
       start_game Questions.math2940;
       num_qs := List.length Questions.math2940
   | _ -> print_endline "Class name DNE");
-  print_endline (string_of_int !score);
+  print_endline ("You answered " ^ string_of_int !score ^ " questions right");
   (* update student info only if they pass*)
   (* passing score will be 2/5 questions *)
   (let overall = float_of_int !score /. float_of_int !num_qs in
    if overall >= 0.4 then (
      add_course player c;
-     add_grade player overall;
-     print_student player)
+     add_grade player overall)
    else print_endline "You failed this class, please try again!");
   reset_score ()
 
@@ -123,21 +116,27 @@ let get_num_courses (s : student) : int = s.num_courses
 
 let rec choose_class (s : student) =
   let available_courses = eligible_courses s in
-  let num = get_num_courses s in
-  print_endline "Type in the classes you want to take:";
+  print_endline
+    "Here are the courses you are qualified for, type its full name to enroll:";
   List.iter (fun c -> print_endline ("* " ^ c)) available_courses;
-  let choice = read_line () in
+  let choice = read_line () |> String.uppercase_ascii in
   if List.exists (fun x -> x = choice) available_courses then begin
     curr_class := choice;
     print_endline ("You are now taking " ^ !curr_class);
-    play_class_scene !curr_class;
     play_questions !curr_class;
-    (* Using the method to increment num_courses *)
-    if num < 7 then choose_class s
+    (* Check if all courses are completed *)
+    let num = get_num_courses s in
+    if num < 8 then begin
+      print_endline
+        ("You need to take "
+        ^ string_of_int (8 - num)
+        ^ " more courses to graduate.");
+      choose_class s (* Call choose_class again for the next course *)
+    end
     else
       print_endline
-        "CONGRATS You have reached the end of Programmer University... ENDING \
-         WIP"
+        ("CONGRATULATIONS " ^ get_name s
+       ^ "!, you have graduated from Programmer University!")
   end
   else begin
     print_endline "Invalid choice or not qualified";
@@ -146,7 +145,6 @@ let rec choose_class (s : student) =
 
 let rec play_story (txt : string list) =
   match txt with
-  | [] -> print_endline "Intro complete. Start choosing your classes."
   | h :: t ->
       (match h with
       | "SETNAME" -> game_set_name ()
@@ -156,11 +154,6 @@ let rec play_story (txt : string list) =
       | "CHOOSECLASS" -> choose_class player (* Start class choosing *)
       | text -> print_endline text);
       play_story t
+  | _ -> print_endline ""
 
 let begin_story_game () = play_story story_text
-
-let play_class_scene (c : string) =
-  print_endline ("Welcome to " ^ c ^ "!");
-  print_endline ("In order to pass " ^ c ^ " you must pass our test");
-  print_endline "This test will require you to answer a lot of questions";
-  print_endline "Would you like to take the test now?"
