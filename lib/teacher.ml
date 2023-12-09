@@ -25,6 +25,7 @@ let new_teacher () =
   gender = Other;
   course = ""
 }
+
 let set_teacher_name (t : teacher) (name : string) = t.teacher_name <- name
 let set_teacher_gender (t : teacher) (g : gender) = t.gender <- g
 let set_teacher_class (t : teacher) (name : string) = t.teacher_name <- name

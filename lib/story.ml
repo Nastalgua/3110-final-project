@@ -20,9 +20,12 @@ let story_text =
     "SETGENDER";
     "Creating character...";
     "GREET";
-    "As a student you must embark upon a long, arduous, mindblowing journey of \
-     learning. \n\
-     There are 8 courses you must complete before graduating.";
+    "Stepping into the threshold of university, a realm where bytes weave \
+     worlds and algorithms shape reality, I stood poised on the brink of an \
+     exhilarating odyssey. The journey that lay ahead promised not just \
+     knowledge but a tapestry of challenges, discoveries, and the boundless \
+     horizons of Computer Science awaiting exploration.\n\
+    \     There are 8 courses you must complete before graduating.";
     "To pass a course, answer two questions right on the exam.";
     "Goodluck soldier";
     "CHOOSECLASS";

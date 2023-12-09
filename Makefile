@@ -21,6 +21,8 @@ game:
 	dune build
 	./_build/default/bin/main.exe
 
-
 doc:
 	dune build @doc
+
+opendoc: doc
+	@bash opendoc.sh
