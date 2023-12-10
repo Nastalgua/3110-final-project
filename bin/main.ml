@@ -1,1 +1,3 @@
-let () = print_endline "Hello, World!"
+open Lib.Story
+
+let () = play_story story_text
