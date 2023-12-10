@@ -10,6 +10,7 @@ type teacher = {
 }
 
 val new_teacher : unit -> teacher
+(** Given a unit creates a new teacher record*)
 
 val get_teacher_name : teacher -> string
 (** Sets the name of the given teacher [t] to a new name [name] *)

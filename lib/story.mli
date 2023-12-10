@@ -20,10 +20,28 @@ val greet : unit -> unit
 (** Function that greets the player based on the name they input*)
 
 val notify : string -> unit
-(** Function used to indicate when yes was entered*)
+(** Given a string [s] if [s] is equal to "Yes" we notify the user by printing a
+    line saying they typed Yes*)
+
+val setup_classmates : unit -> unit
+(** Given a unit sets up the classmates for a user*)
 
 val wait_for_yes : (string -> unit) -> string -> unit
 (** Function used to wait for user to input "Yes"*)
+
+val eligible_courses : student -> string list
+(** Given a student [s] we return a string list containing all the courses they
+    may take*)
+
+val play_questions : string -> unit
+(** Given a string [c] we play the questions for the class specified by c *)
+
+val get_num_courses : student -> int
+(** Given a student [s] return the number of courses they are taking*)
+
+val choose_class : student -> unit
+(** Given a student [s] wait for user input to see whether or not a class can be
+    taken*)
 
 val play_story : string list -> unit
 (** Given a string list [txt] we iterate over [txt] to play the story by either
