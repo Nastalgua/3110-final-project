@@ -1,0 +1,30 @@
+---
+# Members of your group.
+group:
+  - name: Kevin Wang
+    netid: kw633
+  - name: Michael Wu
+    netid: mw885
+  - name: Matthew Chen
+    netid: mwc87
+# Your PM.
+pm:
+  name: Rowan Hennessy
+  netid: rah379
+# Set to false if you don't want your gallery entry to be public.
+publish: false
+# Pithy title
+title: "The Sims: Cornell CS edition"
+# OK if this is a Cornell Github link, but public gallery viewers won't be able to see it.
+git-repo: "https://github.com/Nastalgua/3110-final-project"
+# If you have no demo screencast, replace the url string with an empty string ""
+demo-video-url: ""
+# Write a short, attention-grabbing description of your project.
+desc: >
+  Our project is a minigame that simulates a Cornell student's coursework. 
+  The terminal act as an interface for the player to enroll in a course. 
+  Once they choose their course, they are then lead to a physics-based minigame, 
+  filled with exam style questions. If they answer two questions right, they pass, 
+  and new courses with the corresponding prerequisite will be unlocked. 
+  If not, they will need to retake the course. 
+  The game finished when the student complete all 8 courses in the curriculum. 
