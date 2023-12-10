@@ -1,7 +1,31 @@
 open OUnit2
 
 open Lib
-(** Pretty printers *)
+(* Test Plan
+
+   Automated Testing with OUnit: - Modules Tested: 1. Student Module:
+   Encompasses functionalities like setting and getting student names and
+   genders, managing courses, and calculating grades. 2. Teacher Module: Focuses
+   on testing the functionality of setting and retrieving teacher information to
+   ensure data accuracy and consistency. 3. Score Module: Dedicated to score
+   tracking, this module is thoroughly tested to confirm accurate management of
+   scores, including tracking, incrementing, and resetting functionalities.
+
+   - Test Development Strategy: The suite employs a blend of black box and glass
+   box testing techniques. - Black Box Testing: Used for straightforward
+   functions in the Student and Teacher modules, such as 'get' methods. - Glass
+   Box Testing: Employed for more complex functions that involve state changes,
+   ensuring the correctness of the system's logic and data manipulations. This
+   approach is particularly important for functions in the Score module and
+   state-altering methods in the Student and Teacher modules.
+
+   Rationale for Testing Approach: - The automated testing strategy is highly
+   suitable for the logic-intensive nature of the Student, Teacher, and Score
+   modules. By leveraging both black box and glass box testing, the suite
+   effectively covers a wide spectrum of scenarios. This approach ensures not
+   only the correctness of individual functionalities but also the overall
+   reliability and robustness of the system's logic and data handling
+   capabilities. *)
 
 (** Test modules *)
 
