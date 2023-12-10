@@ -45,16 +45,15 @@ let post_course_dialogue (t : teacher) (grade : float) (passing_grade : float) =
     ("Hi! " ^ "You received a grade of:"
    ^ string_of_float grade);
   (** teacher comments on their grade *)
-  (if grade < 40.0 then print_endline ( get_teacher_name t ^ ": I have no words")
-  else if grade < 50.0 then print_endline (get_teacher_name t ^ ": Please take this course again")
-  else if grade < 60.0 then print_endline (get_teacher_name t  ^ ": I know you are better than that")
-  else if grade < 70.0 then print_endline (get_teacher_name t  ^ ": Please do better")
-  else if grade < 80.0 then print_endline (get_teacher_name t ^ ": Almost there")
-  else if grade < 90.0 then print_endline (get_teacher_name t ^ ": Great job!")
+  if grade < 0.3 then (get_teacher_name t ^ ": Please retake this class")
+else if grade < 0.4 then ( get_teacher_name t ^ ": I have no words")
+  else if grade < 0.5 then  (get_teacher_name t ^ ": Please take this course again")
+  else if grade < 0.6 then  (get_teacher_name t  ^ ": I know you are better than that")
+  else if grade < 0.7 then  (get_teacher_name t  ^ ": Please do better")
+  else if grade < 0.8 then  (get_teacher_name t ^ ": Almost there")
+  else if grade < 0.9 then (get_teacher_name t ^ ": Great job!")
   else
-    print_endline
-    (get_teacher_name t ^ ": Wow you are doing so well! Have you considered getting a PhD?"));
-  if grade < passing_grade then "FAIL" else "PASS"
+    (get_teacher_name t ^ ": Wow you are doing so well! Have you considered getting a PhD?")
 
 let print_teacher (t : teacher) = 
   print_endline "===== TEACHER INFO =====";

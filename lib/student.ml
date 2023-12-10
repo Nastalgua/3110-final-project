@@ -22,7 +22,9 @@ let new_student () =
 
 let set_name (s : student) (name : string) = s.student_name <- name
 let set_gender (s : student) (g : gender) = s.gender <- g
+let set_grade (s : student) (g : float) = s.total_grade <- g
 let get_name (s : student) = s.student_name
+let get_total_grade (s : student) = s.total_grade
 
 let get_gender (choice : int) =
   match choice with
@@ -64,6 +66,27 @@ let add_grade (s : student) (g : float) =
 let finish_course (s : student) (g : float) (course_name : string) =
   add_grade s g;
   add_course s course_name
+
+let comment_on_grade (s1 : student) (s2 : student) =
+  let g1 = get_total_grade s1 in
+  let g2 = get_total_grade s2 in
+  let res = ref "" in
+  if g1 > g2 then res := "Wow you got higher than me, "
+  else res := "Wow you got lower than me, ";
+
+  if g1 < 0.1 then res := !res ^ "try harder next time buddy!"
+  else if g1 < 0.2 then res := !res ^ "try a little more!"
+  else if g1 < 0.3 then res := !res ^ "almost there!"
+  else if g1 < 0.4 then res := !res ^ "almost passing!"
+  else if g1 < 0.5 then res := !res ^ "almost got it!"
+  else if g1 < 0.6 then res := !res ^ "at least you passed!"
+  else if g1 < 0.7 then res := !res ^ "good stuff!"
+  else if g1 < 0.8 then res := !res ^ "nice job!"
+  else if g1 < 0.9 then res := !res ^ "wow you're pretty good at this stuff!"
+  else if g1 < 1.0 then res := !res ^ "you should TA for this class!"
+  else res := !res ^ "How did you get such a high score?";
+
+  res
 
 let print_student (s : student) =
   print_endline "===== STUDENT INFO =====";

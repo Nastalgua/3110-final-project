@@ -4,6 +4,10 @@ open CourseGame
 open Score
 
 let player = new_student ()
+let classmate1 = new_student ()
+let classmate2 = new_student ()
+let classmate3 = new_student ()
+let classmate4 = new_student ()
 let teacher = new_teacher ()
 let play_game () = ()
 let curr_class = ref ""
@@ -13,6 +17,7 @@ let num_qs = ref 0
 let story_text =
   [
     (*========================= INTRO ===========================*)
+    "SETUP";
     "Welcome to Programmer University!";
     "What is your name?";
     "SETNAME";
@@ -52,6 +57,16 @@ let greet () = print_endline ("Hi " ^ player.student_name ^ " nice meeting you!"
 
 let notify (input : string) =
   if input = "Yes" then print_endline "You pressed Yes!"
+
+let setup_classmates () =
+  set_gender classmate1 Male;
+  set_gender classmate2 Male;
+  set_gender classmate3 Female;
+  set_gender classmate4 Other;
+  set_name classmate1 "Michael";
+  set_name classmate2 "Matthew";
+  set_name classmate3 "Matthew";
+  set_name classmate4 "Bob"
 
 let rec wait_for_yes (fn : string -> unit) (choice : string) =
   match choice with
@@ -169,6 +184,7 @@ let rec play_story (txt : string list) =
   match txt with
   | h :: t ->
       (match h with
+      | "SETUP" -> setup_classmates ()
       | "SETNAME" ->
           init_teacher teacher "Mr. Cornell" Male;
           game_set_name ()

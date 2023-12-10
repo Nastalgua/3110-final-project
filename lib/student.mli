@@ -1,12 +1,12 @@
 (** student.mli *)
-(** custom type for genders*)
+(** custom type for genders *)
 type gender =
   | Male
   | Female
   | Other
 
 
-(** custom type to represent student*)
+(** custom type to represent student *)
 type student = {
   mutable student_name : string;
   mutable gender : gender;
@@ -23,12 +23,22 @@ val set_name : student -> string -> unit
 
 val set_gender : student -> gender -> unit
 (** Sets the gender of the given student [s] to a new gender [g] *)
+
+val set_grade : student -> float -> unit
+(** Sets the grade of a given student [s] to a new grade [g]*)
+
 val get_name : student -> string
 (** Gets the name of the given student [s]  *)
+
 val get_gender : int -> gender
 (** Gets the gender of the given student [s]  *)
+
+val get_total_grade : student -> float
+(** Gets the total grade for a given student [s] *)
+
 val get_courses_taken : student -> string list 
 (** Given a student [s] we return a string list from their field s.courses *)
+
 val has_course : string list -> string -> bool
 (** Given a string list [course_list] and a string [c] we check to see that c is in course_list*)
 
@@ -51,6 +61,10 @@ val add_grade : student -> float -> unit
 val finish_course : student -> float -> string -> unit
 (** Given a student [s] and a grade [g] and a course name [course_name] we call
     two helper functions to help update the fields*)
+
+val comment_on_grade : student -> student -> string ref
+(** Given a student [s1] and another student [s2] return the a string detailing the comment
+    s2 has on s1s grade*)
 
 val print_student : student -> unit
 (** Given a student [s] we print all the relevant information about that student*)

@@ -14,6 +14,7 @@ module Test_Score = Lib.Score
 let new_student = Test_Student.new_student
 let new_teacher = Test_Teacher.new_teacher
 let zero_course_student = new_student ()
+let other_student = new_student ()
 let setup_teacher t = Test_Teacher.init_teacher t "Michael" Test_Teacher.Male
 
 let one_course_student =
@@ -42,6 +43,10 @@ let test_set_student_name expected s n =
 let test_set_student_gender expected s g =
   Test_Student.set_gender s g;
   assert_equal expected s.gender
+
+let test_set_grade expected s g = 
+  Test_Student.set_grade s g; 
+  assert_equal expected (Test_Student.get_total_grade s) 
 
 let test_get_student_gender expected in1 =
   let g = Test_Student.get_gender in1 in
@@ -90,6 +95,10 @@ let test_add_grade expected s g =
   Test_Student.add_grade s g;
   assert_equal expected s.total_grade
 
+let test_comment_on_grade expected s1 s2 =
+  let response = Test_Student.comment_on_grade s1 s2 in
+  assert_equal expected !response
+
 let test_finish_course (expected : Test_Student.student) s g c =
   Test_Student.finish_course s g c;
   let same_grade = expected.total_grade = s.total_grade in
@@ -106,9 +115,18 @@ let student_tests =
       let student = new_student () in
       let new_gender = Test_Student.Male in
       test_set_student_gender new_gender student new_gender );
+    ( "set_grade test" >:: fun _ ->
+      let student = new_student () in
+      test_set_grade 0.9 student 0.9 );
     ( "get_gender test" >:: fun _ ->
       let choice = 1 in
       test_get_student_gender Test_Student.Male choice );
+    ( "get_gender test" >:: fun _ ->
+      let choice = 2 in
+      test_get_student_gender Test_Student.Female choice );
+    ( "get_gender test" >:: fun _ ->
+      let choice = 3 in
+      test_get_student_gender Test_Student.Other choice );
     ( "init_student test" >:: fun _ ->
       let student_with_info =
         {
@@ -142,6 +160,121 @@ let student_tests =
         }
       in
       test_finish_course hypothetical_student s 90. "CS6110" );
+      (** Comment on grade tests *)
+      (** Whitebox testing *)
+      (** Commenton grade branch where s1 grade > s2 grade *) 
+      ( "comment on grade branch < s1 and < .1" >:: fun _ ->
+        (Test_Student.set_grade other_student 0.5); 
+        (Test_Student.set_grade zero_course_student 0.09);
+        test_comment_on_grade "Wow you got lower than me, try harder next time buddy!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .2" >:: fun _ ->
+        (Test_Student.set_grade other_student 0.5); 
+        (Test_Student.set_grade zero_course_student 0.11);
+        test_comment_on_grade "Wow you got lower than me, try a little more!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .3" >:: fun _ ->
+        (Test_Student.set_grade other_student 0.5); 
+        (Test_Student.set_grade zero_course_student 0.21);
+        test_comment_on_grade "Wow you got lower than me, almost there!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .4" >:: fun _ ->
+        (Test_Student.set_grade other_student 0.5); 
+        (Test_Student.set_grade zero_course_student 0.31);
+        test_comment_on_grade "Wow you got lower than me, almost passing!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .5" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.41);
+        test_comment_on_grade "Wow you got lower than me, almost got it!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .6" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.51);
+        test_comment_on_grade "Wow you got lower than me, at least you passed!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .7" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.61);
+        test_comment_on_grade "Wow you got lower than me, good stuff!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .8" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.71);
+        test_comment_on_grade "Wow you got lower than me, nice job!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < .9" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.81);
+        test_comment_on_grade "Wow you got lower than me, wow you're pretty good at this stuff!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and < 1.0" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 0.91);
+        test_comment_on_grade "Wow you got lower than me, you should TA for this class!" zero_course_student other_student 
+        );
+      ( "comment on grade branch < s1 and > 1.0" >:: fun _ ->
+        (Test_Student.set_grade other_student 1.5); 
+        (Test_Student.set_grade zero_course_student 1.01);
+        test_comment_on_grade "Wow you got lower than me, How did you get such a high score?" zero_course_student other_student 
+        );
+
+    (** Tests for when s1 grade < s2 grade *)
+    ( "comment on grade branch > s1 and < .1" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.09);
+      test_comment_on_grade "Wow you got higher than me, try harder next time buddy!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .2" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.11);
+      test_comment_on_grade "Wow you got higher than me, try a little more!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .3" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.21);
+      test_comment_on_grade "Wow you got higher than me, almost there!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .4" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.31);
+      test_comment_on_grade "Wow you got higher than me, almost passing!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .5" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.41);
+      test_comment_on_grade "Wow you got higher than me, almost got it!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .6" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.51);
+      test_comment_on_grade "Wow you got higher than me, at least you passed!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .7" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.61);
+      test_comment_on_grade "Wow you got higher than me, good stuff!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .8" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.71);
+      test_comment_on_grade "Wow you got higher than me, nice job!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < .9" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.81);
+      test_comment_on_grade "Wow you got higher than me, wow you're pretty good at this stuff!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and < 1.0" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 0.91);
+      test_comment_on_grade "Wow you got higher than me, you should TA for this class!" zero_course_student other_student 
+      );
+    ( "comment on grade branch > s1 and > 1.0" >:: fun _ ->
+      (Test_Student.set_grade other_student 0.01); 
+      (Test_Student.set_grade zero_course_student 1.01);
+      test_comment_on_grade "Wow you got higher than me, How did you get such a high score?" zero_course_student other_student 
+      );
   ]
 
 let teacher_tests =
@@ -165,7 +298,6 @@ let score_tests =
     ( "increment a score > 1 test" >:: fun _ ->
       Test_Score.add_one ();
       Test_Score.add_one ();
-      print_endline (string_of_int (Test_Score.get_score ()));
       assert_equal 2 (Test_Score.get_score ()) );
     ( "reset score test" >:: fun _ ->
       Test_Score.add_one ();

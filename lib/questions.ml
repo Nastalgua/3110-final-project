@@ -101,6 +101,13 @@ let cs2800 : Question.t list =
         "All subsets of S including the empty set";
         "All elements larger than S";
       ];
+    Question.make "Select the state which makes most sense:" 1
+      [
+        "The powerset of a set of size n has 2 elements";
+        "The powerset of a set of size n has 2^n elements";
+        "The powerset of a set of size n has n^2 element";
+        "The powerset of a set of size n has n^n element";
+      ];
     Question.make "p → q is false only when:" 3
       [
         "p is true and q is true";
