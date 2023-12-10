@@ -105,6 +105,10 @@ let test_finish_course (expected : Test_Student.student) s g c =
   let same_courses = expected.courses = s.courses in
   assert_equal true (same_courses && same_grade)
 
+let test_post_course_dialogue expected t g = 
+  let res = Test_Teacher.post_course_dialogue t g 0.5 in 
+  assert_equal expected res
+
 let student_tests =
   [
     ( "set_name test" >:: fun _ ->
@@ -287,6 +291,56 @@ let teacher_tests =
       let teacher = new_teacher () in
       let new_gender = Test_Teacher.Male in
       test_set_teacher_gender new_gender teacher new_gender );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Did you pay attention in class?" teacher 0.01
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: How did you get here" teacher 0.11
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Please retake this class" teacher 0.21
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: I have no words" teacher 0.31
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Please take this course again" teacher 0.41
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: I know you are better than that" teacher 0.51
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Please do better" teacher 0.61
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Almost there" teacher 0.71
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Great job!" teacher 0.81
+      );
+    ( "post_course_dialogue test" >:: fun _ -> 
+      let teacher = new_teacher () in
+      (setup_teacher teacher);
+      test_post_course_dialogue "Michael: Wow you are doing so well! Have you considered getting a PhD?" teacher 0.91
+      );
   ]
 
 let score_tests =

@@ -11,14 +11,6 @@ type teacher = {
   mutable course : string;
 }
 
-type student = {
-  mutable student_name : string;
-  mutable gender : gender;
-  mutable total_grade : float;
-  mutable num_courses : int;
-  mutable courses : string list;
-}
-
 let new_teacher () = 
   {
   teacher_name = "";
@@ -45,7 +37,9 @@ let post_course_dialogue (t : teacher) (grade : float) (passing_grade : float) =
     ("Hi! " ^ "You received a grade of:"
    ^ string_of_float grade);
   (** teacher comments on their grade *)
-  if grade < 0.3 then (get_teacher_name t ^ ": Please retake this class")
+if grade < 0.1 then (get_teacher_name t ^ ": Did you pay attention in class?")
+else if grade < 0.2 then (get_teacher_name t ^ ": How did you get here")
+else if grade < 0.3 then (get_teacher_name t ^ ": Please retake this class")
 else if grade < 0.4 then ( get_teacher_name t ^ ": I have no words")
   else if grade < 0.5 then  (get_teacher_name t ^ ": Please take this course again")
   else if grade < 0.6 then  (get_teacher_name t  ^ ": I know you are better than that")
